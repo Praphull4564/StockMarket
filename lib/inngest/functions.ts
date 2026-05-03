@@ -135,11 +135,19 @@ export const checkPriceAlerts = inngest.createFunction(
             const db = mongoose.connection.db;
             if (!db) return [];
 
+            const { ObjectId } = require('mongodb');
             const userIds = [...new Set(alerts.map(a => a.userId))];
+            
+            const objectIds = userIds.map(id => {
+                try { return new ObjectId(id); } 
+                catch(e) { return null; }
+            }).filter(Boolean);
+
             const users = await db.collection('user').find({ 
                $or: [
                  { id: { $in: userIds } },
-                 { _id: { $in: userIds } } // Some adapters use _id as string
+                 { _id: { $in: userIds } }, // Some adapters use _id as string
+                 { _id: { $in: objectIds } } // Match actual ObjectIds
                ]
             }).toArray();
 
