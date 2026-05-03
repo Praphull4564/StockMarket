@@ -36,7 +36,7 @@ export const sendSignUpEmail = inngest.createFunction(
 
         await step.run('send-welcome-email', async () => {
             const part = response.candidates?.[0]?.content?.parts?.[0];
-            const introText = (part && 'text' in part ? part.text : null) ||'Thanks for joining Signalist. You now have the tools to track markets and make smarter moves.'
+            const introText = (part && 'text' in part ? part.text : null) ||'Thanks for joining Sanketak. You now have the tools to track markets and make smarter moves.'
 
             const { data: { email, name } } = event;
 
@@ -188,6 +188,7 @@ export const checkPriceAlerts = inngest.createFunction(
              }));
 
              let triggeredCount = 0;
+             const updates = [];
 
              for (const alert of activeAlerts) {
                  const currentPrice = priceMap[alert.symbol];
@@ -201,7 +202,15 @@ export const checkPriceAlerts = inngest.createFunction(
                  }
 
                  if (isTriggered) {
-                     const timestamp = new Date().toLocaleString();
+                     updates.push({ alert, currentPrice });
+                 }
+             }
+
+             if (updates.length > 0) {
+                 await connectToDatabase();
+                 const timestamp = new Date().toLocaleString();
+                 
+                 await Promise.all(updates.map(async ({ alert, currentPrice }) => {
                      await sendStockAlertEmail({
                          email: alert.userEmail,
                          symbol: alert.symbol,
@@ -211,12 +220,11 @@ export const checkPriceAlerts = inngest.createFunction(
                          condition: alert.condition,
                          timestamp
                      });
-
-                     await connectToDatabase();
                      await Alert.updateOne({ _id: alert._id }, { isActive: false, lastTriggeredAt: new Date() });
-                     triggeredCount++;
-                 }
+                 }));
+                 triggeredCount = updates.length;
              }
+
              return { count: triggeredCount };
         });
 

@@ -15,10 +15,10 @@ export const sendWelcomeEmail = async ({ email, name, intro }: WelcomeEmailData)
         .replace('{{intro}}', intro);
 
     const mailOptions = {
-        from: `"Signalist" <signalist@jsmastery.pro>`,
+        from: `"Sanketak" <sanketak@jsmastery.pro>`,
         to: email,
-        subject: `Welcome to Signalist - your stock market toolkit is ready!`,
-        text: 'Thanks for joining Signalist',
+        subject: `Welcome to Sanketak - your stock market toolkit is ready!`,
+        text: 'Thanks for joining Sanketak',
         html: htmlTemplate,
     }
 
@@ -33,10 +33,10 @@ export const sendNewsSummaryEmail = async (
         .replace('{{newsContent}}', newsContent);
 
     const mailOptions = {
-        from: `"Signalist News" <signalist@jsmastery.pro>`,
+        from: `"Sanketak News" <sanketak@jsmastery.pro>`,
         to: email,
         subject: `📈 Market News Summary Today - ${date}`,
-        text: `Today's market news summary from Signalist`,
+        text: `Today's market news summary from Sanketak`,
         html: htmlTemplate,
     };
 
@@ -56,7 +56,7 @@ export const sendStockAlertEmail = async (
         .replace(/{{timestamp}}/g, timestamp);
 
     const mailOptions = {
-        from: `"Signalist Alerts" <signalist@jsmastery.pro>`,
+        from: `"Sanketak Alerts" <sanketak@jsmastery.pro>`,
         to: email,
         subject: `🚨 Price Alert: ${symbol} hit ${condition === 'greater_than' ? 'upper' : 'lower'} target!`,
         text: `Your price alert for ${symbol} was triggered at $${currentPrice.toFixed(2)}.`,
@@ -72,14 +72,14 @@ export const sendMissYouEmail = async (
     // Assuming we have a MISS_YOU_EMAIL_TEMPLATE, fallback to text if not
     const htmlTemplate = `
       <h1>We Miss You, ${name}</h1>
-      <p>It's been a while since you checked your watchlist on Signalist. The markets have been moving!</p>
+      <p>It's been a while since you checked your watchlist on Sanketak. The markets have been moving!</p>
       <a href="https://stock-market-dev.vercel.app/">Return to Dashboard</a>
     `;
 
     const mailOptions = {
-        from: `"Signalist" <signalist@jsmastery.pro>`,
+        from: `"Sanketak" <sanketak@jsmastery.pro>`,
         to: email,
-        subject: `We miss you at Signalist!`,
+        subject: `We miss you at Sanketak!`,
         text: `Hi ${name}, it's been a while since you checked your watchlist.`,
         html: htmlTemplate,
     };
