@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import TradingViewWidget from "@/components/TradingViewWidget";
 import {
   CANDLE_CHART_WIDGET_CONFIG,
