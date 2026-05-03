@@ -130,7 +130,7 @@ export default async function WatchlistPage() {
               <BellRing className="w-5 h-5 text-yellow-500" />
               Active Alerts
             </h2>
-            <span className="wl-badge">{alerts.length} alerts</span>
+            <span className="wl-badge">{alerts.length} / 10 alerts used</span>
           </div>
 
           <div className="wl-alerts-list">
@@ -164,10 +164,7 @@ export default async function WatchlistPage() {
                         Price {alert.condition === 'greater_than' ? '>' : '<'} ${alert.targetPrice}
                       </p>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className="wl-freq-badge">
-                        {alert.frequency}
-                      </span>
+                    <div className="flex items-center justify-end">
                       <DeleteAlertBtn alertId={alert._id.toString()} />
                     </div>
                   </div>
