@@ -11,7 +11,6 @@ export async function createAlert(data: {
   type: string;
   condition: string;
   targetPrice: number;
-  frequency: string;
 }) {
   try {
     const session = await auth.api.getSession({ headers: await headers() });
@@ -19,9 +18,15 @@ export async function createAlert(data: {
 
     await connectToDatabase();
 
+    const existingAlertsCount = await Alert.countDocuments({ userId: session.user.id });
+    if (existingAlertsCount >= 10) {
+      return { success: false, error: "You have reached the maximum limit of 10 alerts." };
+    }
+
     const newAlert = await Alert.create({
       userId: session.user.id,
       ...data,
+      frequency: 'Once per day', // Hardcoded default to satisfy model
       isActive: true,
     });
 

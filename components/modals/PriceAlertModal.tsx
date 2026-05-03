@@ -31,7 +31,6 @@ export default function PriceAlertModal({
       type: formData.get("type") as string,
       condition: formData.get("condition") as string,
       targetPrice: Number(formData.get("targetPrice")),
-      frequency: formData.get("frequency") as string,
     };
 
     const result = await createAlert(data);
@@ -121,17 +120,7 @@ export default function PriceAlertModal({
             />
           </div>
 
-          <div className="space-y-1.5 mb-2">
-            <label className="text-sm font-medium text-gray-400">Frequency</label>
-            <select 
-              name="frequency" 
-              className="w-full h-10 px-3 rounded-md !bg-[#212328] border border-[#30333A] text-sm focus:border-[#E8BA40] outline-none"
-            >
-              <option value="Once per day">Once per day</option>
-              <option value="Once per hour">Once per hour</option>
-              <option value="Once per minute">Once per minute</option>
-            </select>
-          </div>
+
 
           <button 
             type="submit" 

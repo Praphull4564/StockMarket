@@ -220,7 +220,7 @@ export const checkPriceAlerts = inngest.createFunction(
                          condition: alert.condition,
                          timestamp
                      });
-                     await Alert.updateOne({ _id: alert._id }, { isActive: false, lastTriggeredAt: new Date() });
+                     await Alert.deleteOne({ _id: alert._id });
                  }));
                  triggeredCount = updates.length;
              }
