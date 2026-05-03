@@ -16,9 +16,10 @@ export const signUpWithEmail = async ({ email, password, fullName, country, inve
         }
 
         return { success: true, data: response }
-    } catch (e) {
+    } catch (e: any) {
         console.log('Sign up failed', e)
-        return { success: false, error: 'Sign up failed' }
+        const errorMessage = e.body?.message || e.message || 'Sign up failed';
+        return { success: false, error: errorMessage }
     }
 }
 
@@ -27,9 +28,10 @@ export const signInWithEmail = async ({ email, password }: SignInFormData) => {
         const response = await auth.api.signInEmail({ body: { email, password } })
 
         return { success: true, data: response }
-    } catch (e) {
+    } catch (e: any) {
         console.log('Sign in failed', e)
-        return { success: false, error: 'Sign in failed' }
+        const errorMessage = e.body?.message || e.message || 'Invalid email or password';
+        return { success: false, error: errorMessage }
     }
 }
 
