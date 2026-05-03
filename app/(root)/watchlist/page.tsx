@@ -163,6 +163,9 @@ export default async function WatchlistPage() {
                       <p className="text-sm font-semibold text-gray-200">
                         Price {alert.condition === 'greater_than' ? '>' : '<'} ${alert.targetPrice}
                       </p>
+                      <p className="text-xs text-yellow-500 mt-1">
+                        Triggers: {alert.triggerCount || 0}/10
+                      </p>
                     </div>
                     <div className="flex items-center justify-end">
                       <DeleteAlertBtn alertId={alert._id.toString()} />

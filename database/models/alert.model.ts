@@ -9,6 +9,7 @@ export interface AlertItem extends Document {
   targetPrice: number;
   frequency: string;
   isActive: boolean;
+  triggerCount: number;
   lastTriggeredAt?: Date;
   createdAt: Date;
 }
@@ -23,6 +24,7 @@ const AlertSchema = new Schema<AlertItem>(
     targetPrice: { type: Number, required: true },
     frequency: { type: String, required: true, default: 'Once per day' }, // "Once per day", "Once per hour", etc.
     isActive: { type: Boolean, default: true },
+    triggerCount: { type: Number, default: 0 },
     lastTriggeredAt: { type: Date },
     createdAt: { type: Date, default: Date.now },
   },

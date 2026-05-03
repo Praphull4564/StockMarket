@@ -220,7 +220,18 @@ export const checkPriceAlerts = inngest.createFunction(
                          condition: alert.condition,
                          timestamp
                      });
-                     await Alert.deleteOne({ _id: alert._id });
+                     
+                     const currentCount = alert.triggerCount || 0;
+                     if (currentCount >= 9) {
+                         // This is the 10th trigger, so we delete it.
+                         await Alert.deleteOne({ _id: alert._id });
+                     } else {
+                         // Increment trigger count
+                         await Alert.updateOne(
+                             { _id: alert._id }, 
+                             { $inc: { triggerCount: 1 }, $set: { lastTriggeredAt: new Date() } }
+                         );
+                     }
                  }));
                  triggeredCount = updates.length;
              }
