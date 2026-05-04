@@ -2,7 +2,7 @@
 
 Sanketak is a sophisticated, full-stack stock market tracking and analysis platform. Built with a modern tech stack, it provides real-time market data, interactive charts, and personalized alerting systems to help investors make informed decisions.
 
-![Sanketak Preview](https://github.com/Praphull4564/StockMarket/raw/main/public/assets/images/preview.png) *(Note: Replace with actual preview image if available)*
+![Sanketak Preview](https://github.com/Praphull4564/StockMarket/raw/main/public/assets/images/preview.png)
 
 ## 🚀 Key Features
 
