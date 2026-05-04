@@ -184,19 +184,14 @@
     @apply text-xs md:text-lg font-bold text-gray-400 not-italic;
   }
   .auth-dashboard-preview {
-    @apply border-4 border-gray-700/50 left-0 hidden w-[1200px] h-auto max-w-none lg:block rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.6)];
-    transform: perspective(1200px) rotateY(-15deg) rotateX(10deg) translateZ(50px) translateY(10%);
-    mask-image: radial-gradient(circle at center, black 40%, transparent 90%),
-                linear-gradient(to bottom, black 50%, transparent 95%);
-    mask-composite: intersect;
-    opacity: 0.7;
-    filter: blur(0.5px);
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    @apply border-4 border-gray-700/50 right-0 bottom-0 hidden w-[90%] h-auto max-w-[1000px] lg:block rounded-t-2xl shadow-[0_-20px_50px_rgba(0,0,0,0.6)];
+    transform: perspective(1500px) rotateY(-10deg) rotateX(5deg);
+    opacity: 0.9;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .auth-dashboard-preview:hover {
     @apply opacity-100;
-    filter: blur(0px);
-    transform: perspective(1200px) rotateY(-8deg) rotateX(4deg) translateZ(100px) translateY(5%) scale(1.05);
+    transform: perspective(1500px) rotateY(-2deg) rotateX(2deg) scale(1.02);
   }
   .form-title {
     @apply text-4xl font-bold text-gray-400 mb-10;
